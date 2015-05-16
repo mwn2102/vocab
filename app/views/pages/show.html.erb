@@ -1,0 +1,25 @@
+<div>
+
+
+<% if @page%>
+ <p> <%= @page.word %></p>
+ <p>  <%= @page.content %></p>
+ <p><%= link_to "Next", page_path(@next) %></p>
+ 
+
+<% elsif @next %>
+ <p> <%= @next.word %></p>
+ <p>  <%= @next.content %></p>
+ <p><%= link_to "Next", page_path(@next) %></p>
+ 
+ <% else %>
+ 
+ <p> Good Job!</p>
+ <p><%= link_to "Home", pages_path %> </p>
+<%end%>
+
+</div>
+
+<!--
+Had to add the show_path, then had to add the if @next ...
+--> 

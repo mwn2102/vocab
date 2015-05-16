@@ -1,0 +1,24 @@
+<div class="main">
+  <div class="container">
+    
+<% @pages.each do |page| %> 
+<div class="message"> 
+  <p class="content"><%= page.word %></p> 
+  <p class="time"><%= page.content %></p> 
+  <p><%=link_to "Delete", page_path(page), method: :delete %></p>
+  <p><%= link_to "Edit", edit_page_path(page) %></p>
+</div> 
+<% end %>
+<!--page_path take "page" not "@page"-->
+  </div>
+  <p>**********************************</p>
+  <%= link_to 'Add Word', new_page_path %> 
+  <%= link_to 'Practice', page_path(Page.where(id: 0)) %> 
+  <!-- page_path needs an argument? pages/show?or page/:id? 
+  'pages/0'
+  page_path with difference arguments not working
+  @practice_page(@page)
+  Page.where(id: 0)
+  --> 
+
+</div>

@@ -3,23 +3,30 @@
 
 <% if @page%>
  <p> <%= @page.word %></p>
- <p>  <%= @page.content %></p>
- <p><%= link_to "Next", page_path(@next) %></p>
+ <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">  
+  Show Definition
+</button>
+<div id="demo" class="collapse">
+  <div class="well"> <%= @page.content %>
+  </div>
+ </div>
+ <%= form_for @page do |f| %> 
+  <div> 
+    <%= f.label :Learning %>
+    <%= f.radio_button :knowledge, "Learning" %><br>
+    <%= f.label :Learned %>
+    <%= f.radio_button :knowledge, "Learned" %><br>
+    <%= f.submit "Update" %>
+ </div> 
+  <%end%>
  
+ <p><%= link_to "Next", page_path(@page) %></p>
 
-<% elsif @next %>
- <p> <%= @next.word %></p>
- <p>  <%= @next.content %></p>
- <p><%= link_to "Next", page_path(@next) %></p>
- 
  <% else %>
- 
+
  <p> Good Job!</p>
  <p><%= link_to "Home", pages_path %> </p>
 <%end%>
 
-</div>
 
-<!--
-Had to add the show_path, then had to add the if @next ...
---> 
+</div>

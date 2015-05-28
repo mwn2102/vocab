@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#index'
   resources :pages
-  # get 'pages/practice' => 'pages#practice', as: :practice
+
   
   # get 'pages' => 'pages#index'
   # get 'pages/new' => 'pages#new'

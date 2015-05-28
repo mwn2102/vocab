@@ -1,24 +1,50 @@
-<div class="main">
-  <div class="container">
-    
-<% @pages.each do |page| %> 
-<div class="message"> 
-  <p class="content"><%= page.word %></p> 
-  <p class="time"><%= page.content %></p> 
-  <p><%=link_to "Delete", page_path(page), method: :delete %></p>
-  <p><%= link_to "Edit", edit_page_path(page) %></p>
-</div> 
-<% end %>
-<!--page_path take "page" not "@page"-->
-  </div>
-  <p>**********************************</p>
-  <%= link_to 'Add Word', new_page_path %> 
-  <%= link_to 'Practice', page_path(Page.where(id: 0)) %> 
-  <!-- page_path needs an argument? pages/show?or page/:id? 
-  'pages/0'
-  page_path with difference arguments not working
-  @practice_page(@page)
-  Page.where(id: 0)
-  --> 
+<div class="container">
+<h1>Vocab Center</h1>
 
+
+<div class= "learning">
+<h3>Learning</h3> 
+<div class="row">
+<% @pages_learning.each do |page| %> 
+  <div class="col-sm-1 col-sm-offset-2">
+    <p><%= page.word %></p> 
+  </div> 
+  <div class="col-sm-5">
+    <p><%= page.content %></p> 
+  </div>
+  <div class="col-sm-1">
+    <p><%=link_to "", page_path(page), method: :delete, class: "glyphicon glyphicon-trash"%></p>
+  </div>
+  <div class="col-sm-3">
+    <p><%= link_to "", edit_page_path(page), class: "glyphicon glyphicon-pencil" %></p>
+  </div>
+  <div class="clearfix visible-lg-block"></div>
+<% end %>
+</div> 
+</div>
+
+<div class= "learned">
+<h3>Learned</h3> 
+<div class="row">
+<% @pages_learned.each do |page| %> 
+  <div class="col-sm-1 col-sm-offset-3">
+    <p><%= page.word %></p> 
+  </div> 
+  <div class="col-sm-3">
+    <p><%= page.content %></p> 
+  </div>
+  <div class="col-sm-1">
+    <p><%=link_to "", page_path(page), method: :delete, class: "glyphicon glyphicon-trash"%></p>
+  </div>
+  <div class="col-sm-4">
+    <p><%= link_to "", edit_page_path(page), class: "glyphicon glyphicon-pencil" %></p>
+  </div>
+<% end %>
+</div> 
+</div>
+</div>
+
+<div class="footer">
+  <%= link_to 'Add Word', new_page_path %> 
+  <%= link_to 'Practice', page_path(@page, first: true)  %> 
 </div>

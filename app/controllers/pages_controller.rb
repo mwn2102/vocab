@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
     def index
-        @pages = Page.all
+        @pages_learning = Page.where(knowledge: "Learning")
+        @pages_learned = Page.where(knowledge: "Learned")
+        @page = Page.where(knowledge: 'Learning').first
     end
     
     def new
@@ -14,21 +16,34 @@ class PagesController < ApplicationController
     def update 
       @page = Page.find(params[:id]) 
       if @page.update_attributes(page_params) 
-        redirect_to '/pages'
-      else 
-        render 'edit' 
-      end 
+        redirect_to(:back)
+      end
+    end
+    
+    def refresh
+      @page = Page.find(params[:id]) 
+      @page.update(page_params) 
+      redirect_to page_path(@page)
     end
     
     def show
-      if @page.nil?
+      # if @page.nil?
+      #   @page = Page.where(knowledge: 'Learning').first
+      # else
+      #   @next = Page.where("id > ?", params[:id]).order(:id).first 
+      # end
+      
+      if params[:first] == 'true'
         @page = Page.where(knowledge: 'Learning').first
+        # @next = Page.where("id > ?", @page.id).order(:id).first
       else
-        @next = Page.where("id > ?", params[:id]).order(:id).first 
+        @page = Page.where(knowledge: "Learning").where("id > ?", params[:id]).order(:id).first 
+        # @next = Page.where("id > ?", @page.id).order(:id).first 
       end
       
-      p @page
     end
+    
+    
       # @learning ||= []
       # if @learning.empty?
       #   @learning = Page.where(knowledge: 'Learning')
@@ -62,10 +77,10 @@ class PagesController < ApplicationController
 
       
     
-    def practice
-      @page = Page.where(knowledge: 'Learning').first
-      # redirect_to page_path(@page)
-    end
+    # def practice
+    #   @page = Page.where(knowledge: 'Learning').first
+    #   # redirect_to page_path(@page)
+    # end
     
           # if @page.id.nil?
     
@@ -84,7 +99,8 @@ class PagesController < ApplicationController
     end
     
     def create 
-      @page = Page.new(page_params) 
+      @page = Page.new(page_params)
+      @page.define(@page)
       if @page.save 
         redirect_to pages_path
       else 
@@ -94,6 +110,6 @@ class PagesController < ApplicationController
     
     private 
         def page_params 
-          params.require(:page).permit(:word, :content) 
+          params.require(:page).permit(:word, :content, :knowledge) 
         end
 end

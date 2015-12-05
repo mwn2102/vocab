@@ -1,32 +1,37 @@
-<div>
 
-
+<div class = "row">
+<div class = "col-sm-4 col-sm-offset-4 body">
 <% if @page%>
- <p> <%= @page.word %></p>
+<div class="show_page">
+ <p id="show_page_word"> <%= @page.word %></p>
  <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">  
   Show Definition
 </button>
 <div id="demo" class="collapse">
   <div class="well"> <%= @page.content %>
   </div>
- </div>
- <%= form_for @page do |f| %> 
-  <div> 
+</div>
+ <%= form_for @page, remote: true do |f| %> 
     <%= f.label :Learning %>
     <%= f.radio_button :knowledge, "Learning" %><br>
     <%= f.label :Learned %>
     <%= f.radio_button :knowledge, "Learned" %><br>
     <%= f.submit "Update" %>
- </div> 
-  <%end%>
+
+ <%end%>
+
  
- <p><%= link_to "Next", page_path(@page) %></p>
+ <p>
+  <%= link_to "Next", page_path(@page) %>
+  <%= link_to "Home", pages_path %> 
+ </p>
+ 
 
  <% else %>
 
  <p> Good Job!</p>
  <p><%= link_to "Home", pages_path %> </p>
+ </div>
 <%end%>
-
-
+</div>
 </div>

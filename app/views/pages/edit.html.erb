@@ -1,18 +1,21 @@
-<div>
+<div class = "row">
+<div class = "col-sm-4 col-sm-offset-4 body">
 <%= form_for @page do |f| %> 
-  <div class="field"> 
-    <%= f.label :page, "Add Word" %><br> 
-    <%= f.text_field :word %><br> 
-    <%= f.text_area :content %><br>
+  <div class="form-group"> 
+    <%= f.label :page, "Edit Word" %><br> 
+    <%= f.text_field :word, class: "form-control" %><br> 
+    <%= f.text_area :content, rows: 10, class: "form-control"  %><br>
+    <div class="form-inline">
     <%= f.label :Learning %>
-    <%= f.radio_button :knowledge, "Learning" %><br>
+    <%= f.radio_button :knowledge, "Learning", class: "form-control" %>
     <%= f.label :Learned %>
-    <%= f.radio_button :knowledge, "Learned" %><br>
-
+    <%= f.radio_button :knowledge, "Learned", class: "form-control" %><br>
+    </div>
   </div> 
   <div class="actions"> 
     <%= f.submit "Update" %> 
   </div> 
 <% end %>
-</div>
  <p><%= link_to "Home", pages_path %> </p>
+</div>
+</div>

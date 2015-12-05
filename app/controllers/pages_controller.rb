@@ -1,12 +1,22 @@
 class PagesController < ApplicationController
+  
     def index
-        @pages_learning = Page.where(knowledge: "Learning")
+        # @pages_learning = Page.where(knowledge: "Learning")
+        # @pages_learning = Page.where(knowledge: "Learning").order(:row_order)
+        @pages_learning = Page.where(knowledge: "Learning").rank(:row_order).all
         @pages_learned = Page.where(knowledge: "Learned")
         @page = Page.where(knowledge: 'Learning').first
     end
     
+    def update_row_order
+        @word = Page.find(word_params[:word_id])
+        @word.row_order = word_params[:row_order_position] #row_order_position?
+        @word.save
+        render nothing: true # this is a POST action, updates sent via AJAX, no view rendered
+    end
+    
     def new
-        @page = Page.new   #note that page is singular
+        @page = Page.new
     end
     
     def edit 
@@ -15,8 +25,10 @@ class PagesController < ApplicationController
 
     def update 
       @page = Page.find(params[:id]) 
-      if @page.update_attributes(page_params) 
-        redirect_to(:back)
+      @page.update_attributes(page_params) 
+      respond_to do |format|
+        format.html {redirect_to(:back)}
+        format.js 
       end
     end
     
@@ -43,55 +55,6 @@ class PagesController < ApplicationController
       
     end
     
-    
-      # @learning ||= []
-      # if @learning.empty?
-      #   @learning = Page.where(knowledge: 'Learning')
-      #   @length = @learning.length
-      #   @count = 0
-      #   @page = Page.find(@learning[@count])
-      #   @count = @count + 1
-      # else
-      #   if @count == @length
-      #     @count = 0
-      #     @learning = []
-      #     redirect_to '/pages' 
-      #   else
-      #     @page = Page.find(@learning[@count])
-      #     @count = @count + 1
-      #   end
-      # end
-      
-      # @page = Page.find(params[:id])
-      
-      # @page = Page.where(knowledge: 'Learning').first
-      # @actual= Page.find(@page.id)
-      # redirect_to page_path(@actual)
-      # @final = Page.find(params[:id])
-      # @page = Page.select(knowledge: 'Learning')
-    
-      # if @next.nil?
-      #   @next = Page.where("id > ?", params[:id]).order(:id).first 
-      # end
-      # could use the full object instead of params[:id]
-
-      
-    
-    # def practice
-    #   @page = Page.where(knowledge: 'Learning').first
-    #   # redirect_to page_path(@page)
-    # end
-    
-          # if @page.id.nil?
-    
-    # def next_page
-    #   # @page = Page.find(params[:id])
-    #   def forward
-    #     Page.where("knowledge = Learning AND id > ?", id).first
-    #   end
-    #   @next_page = @page.forward
-    # end
-    
     def destroy
       @page = Page.find(params[:id])
       @page.destroy
@@ -111,5 +74,9 @@ class PagesController < ApplicationController
     private 
         def page_params 
           params.require(:page).permit(:word, :content, :knowledge) 
+        end
+        
+        def word_params
+          params.require(:page).permit(:word_id, :row_order_position)
         end
 end

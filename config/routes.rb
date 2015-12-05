@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#index'
   resources :pages
+  post 'pages/update_row_order' => 'pages#update_row_order'
 
   
   # get 'pages' => 'pages#index'

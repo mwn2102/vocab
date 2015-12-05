@@ -1,6 +1,8 @@
 class Page < ActiveRecord::Base
   require 'open-uri'
   require 'nokogiri'
+  include RankedModel
+  ranks :row_order
   
   def define (entry)
     # get_word = Page.find_by(word: entry.word)

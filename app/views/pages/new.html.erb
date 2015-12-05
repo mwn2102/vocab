@@ -1,12 +1,14 @@
-<div>
+<div class = "row">
+<div class = "col-sm-4 col-sm-offset-4 body">
 <%= form_for(@page) do |f| %> 
-  <div class="field"> 
-    <%= f.label :page %><br> 
-    <%= f.text_area :word %><br> 
+  <div class="form-group"> 
+    <%= f.label :page, "New Word" %><br> 
+    <%= f.text_field :word, class: "form-control" %><br> 
 
   </div> 
   <div class="actions"> 
     <%= f.submit "Create" %> 
   </div> 
 <% end %>
+</div>
 </div>

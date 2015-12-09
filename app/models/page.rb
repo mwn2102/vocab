@@ -3,6 +3,7 @@ class Page < ActiveRecord::Base
   require 'nokogiri'
   include RankedModel
   ranks :row_order
+  validates :word, presence: true, uniqueness: true
   
   def define (entry)
     # get_word = Page.find_by(word: entry.word)

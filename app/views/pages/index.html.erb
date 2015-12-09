@@ -1,6 +1,3 @@
-
-<h1>Vocab Center</h1>
-
 <div class="main_links">
   <%= link_to 'Add Word', new_page_path, class: "btn btn-success" %> 
   <% if !@page.blank? %>
@@ -9,7 +6,7 @@
 </div>
 
 <% if @pages_learning.any? %>
-<div class= "learning">   <!-- different class from box-->
+<div class= "learning">  
 <h3>Learning</h3> 
 <table class="table table-hover" id="sortable"> 
   <% @pages_learning.each do |page| %> 
@@ -36,6 +33,7 @@
 <% if @pages_learned.any? %>
 <div class= "learned">
 <h3> Learned <span id="hide"> Hide </span> </h3> 
+
   <table class="table table-hover display_learned"> 
     <% @pages_learned.each do |page| %> 
       <tr>

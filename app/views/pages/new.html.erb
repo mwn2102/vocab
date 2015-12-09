@@ -1,3 +1,4 @@
+<%= render "layouts/errors" %>
 <div class = "row">
 <div class = "col-sm-4 col-sm-offset-4 body">
 <%= form_for(@page) do |f| %> 
@@ -7,7 +8,7 @@
 
   </div> 
   <div class="actions"> 
-    <%= f.submit "Create" %> 
+    <%= f.submit "Create", class: "btn btn-default" %> 
   </div> 
 <% end %>
 </div>

@@ -1,21 +1,24 @@
+<%= render "layouts/errors" %>
 <div class = "row">
 <div class = "col-sm-4 col-sm-offset-4 body">
+
 <%= form_for @page do |f| %> 
-  <div class="form-group"> 
+  <div class="form-group">
     <%= f.label :page, "Edit Word" %><br> 
     <%= f.text_field :word, class: "form-control" %><br> 
     <%= f.text_area :content, rows: 10, class: "form-control"  %><br>
+  </div>
     <div class="form-inline">
-    <%= f.label :Learning %>
-    <%= f.radio_button :knowledge, "Learning", class: "form-control" %>
-    <%= f.label :Learned %>
-    <%= f.radio_button :knowledge, "Learned", class: "form-control" %><br>
+    <%= f.label :Learning, class:"radio-inline"%>
+    <%= f.radio_button :knowledge, "Learning" %>
+    <%= f.label :Learned, class:"radio-inline"%>
+    <%= f.radio_button :knowledge, "Learned" %><br>
     </div>
-  </div> 
   <div class="actions"> 
-    <%= f.submit "Update" %> 
+    <%= f.submit "Update", class: "btn btn-default" %> 
   </div> 
-<% end %>
+<%end%>
+
  <p><%= link_to "Home", pages_path %> </p>
 </div>
 </div>

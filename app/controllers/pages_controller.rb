@@ -53,6 +53,8 @@ class PagesController < ApplicationController
         # @next = Page.where("id > ?", @page.id).order(:id).first 
       end
       
+      @practice_again = Page.where(knowledge: 'Learning').first
+      
     end
     
     def destroy

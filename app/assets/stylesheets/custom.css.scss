@@ -63,6 +63,24 @@ div.learning, div.learned {
      text-align: center;
 }
 
-#radio {
-    display: inline;
+// #radio {
+//     display: inline;
+// }
+
+nav.navbar.navbar-default > h2.text-center > a {
+     color: rgba(94, 15, 28, 0.69);
+     letter-spacing: 1.1px;
+     text-decoration: none;
+}
+
+div.actions {
+    padding-top: 10px;
+}
+
+.form-inline.practice {
+    margin-top: 20px;
+}
+
+.home_links {
+    margin-top: 20px;
 }

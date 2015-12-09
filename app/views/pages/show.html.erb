@@ -12,25 +12,32 @@
   </div>
 </div>
  <%= form_for @page, remote: true do |f| %> 
-    <%= f.label :Learning %>
-    <%= f.radio_button :knowledge, "Learning" %><br>
-    <%= f.label :Learned %>
+   <div class="form-inline practice">
+    <%= f.label :Learning, class:"radio-inline"%>
+    <%= f.radio_button :knowledge, "Learning" %>
+    <%= f.label :Learned, class:"radio-inline"%>
     <%= f.radio_button :knowledge, "Learned" %><br>
-    <%= f.submit "Update" %>
-
+    </div>
+    <div class="actions">
+    <%= f.submit "Update", class: "btn btn-default" %>
+    </div>
  <%end%>
 
+
  
- <p>
-  <%= link_to "Next", page_path(@page) %>
+ <p class = "home_links">
+  <%= link_to "Next", page_path(@page)%> |
   <%= link_to "Home", pages_path %> 
  </p>
  
 
  <% else %>
 
- <p> Good Job!</p>
- <p><%= link_to "Home", pages_path %> </p>
+ <div class="btn-group btn-group-lg">
+    <%= link_to "Home", pages_path, class: "btn btn-default"%>
+    <%= link_to 'Practice Again', page_path(@practice_again, first: true), class: "btn btn-default" %> 
+ </div>
+ 
  </div>
 <%end%>
 </div>
